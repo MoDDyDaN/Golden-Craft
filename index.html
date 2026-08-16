@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Craft — Minecraft сервер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0f;
+            color: #f5e9c9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(180deg, #fff6d5 0%, #f5c542 35%, #b8860b 55%, #f5c542 75%, #fff6d5 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            text-shadow: none;
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.35));
+        }
+
+        .logo span {
+            background: linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header {
+            background: linear-gradient(180deg, #14141c 0%, #0d0d14 100%);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tg-link {
+            color: #f5e9c9;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .tg-link:hover {
+            border-color: #f5c542;
+            color: #f5c542;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+        }
+
+        .gold-btn {
+            border: 1px solid #8a6d1f;
+            color: #3a2a00;
+            font-weight: 700;
+            cursor: pointer;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+            background-image:
+                linear-gradient(180deg, #fff8d0 0%, #ffe066 25%, #f5c542 50%, #d4a017 75%, #b8860b 100%);
+            background-size: 100% 300%;
+            background-position: 0 0;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -2px 4px rgba(120, 80, 0, 0.45),
+                0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s, background-position 0.4s;
+        }
+
+        .gold-btn:hover {
+            background-position: 0 100%;
+            transform: translateY(-2px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -2px 4px rgba(120, 80, 0, 0.45),
+                0 6px 20px rgba(255, 215, 0, 0.45);
+        }
+
+        .gold-btn:active {
+            transform: translateY(1px);
+        }
+
+        .donate-btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 90px 24px;
+            background:
+                linear-gradient(180deg, rgba(10, 10, 15, 0) 0%, rgba(10, 10, 15, 0.85) 100%),
+                radial-gradient(ellipse at 50% -20%, rgba(255, 215, 0, 0.18) 0%, transparent 60%),
+                linear-gradient(135deg, #141420 0%, #1a1a2e 50%, #0f1020 100%);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #f5c542 30%, #fff8d0 50%, #f5c542 70%, transparent 100%);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(180deg, #fff6d5 0%, #f5c542 40%, #b8860b 60%, #f5c542 80%, #fff6d5 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 20px rgba(255, 215, 0, 0.3));
+        }
+
+        .hero h2 {
+            font-size: 22px;
+            font-weight: 500;
+            color: #e8d9a8;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 14px 44px;
+            border-radius: 10px;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .server-ip {
+            display: inline-block;
+            margin-top: 28px;
+            background: linear-gradient(180deg, #1a1a24 0%, #14141c 100%);
+            border: 1px solid #f5c542;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #f5c542;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), inset 0 0 15px rgba(255, 215, 0, 0.05);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 56px 24px;
+            width: 100%;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(24px, 4vw, 34px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(180deg, #fff6d5 0%, #f5c542 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(255, 215, 0, 0.25));
+        }
+
+        .panel {
+            background: linear-gradient(180deg, #16161f 0%, #101018 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 14px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            position: relative;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.7) 50%, transparent 100%);
+        }
+
+        .about {
+            padding: 40px;
+            margin-bottom: 64px;
+            text-align: center;
+        }
+
+        .about p {
+            color: #d9c98f;
+            line-height: 1.9;
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .donate-section {
+            padding: 48px 24px;
+            margin-bottom: 64px;
+            text-align: center;
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 4px 40px rgba(255, 215, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .sponsor-price {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 5vw, 44px);
+            color: #f5c542;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .donate-perks {
+            list-style: none;
+            max-width: 620px;
+            margin: 0 auto 24px;
+            text-align: left;
+        }
+
+        .donate-perks li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.12);
+            color: #e8d9a8;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .donate-perks li:last-child {
+            border-bottom: none;
+        }
+
+        .donate-note {
+            font-size: 12px;
+            color: #9c8a5c;
+            margin-bottom: 8px;
+        }
+
+        .donate-how {
+            color: #e8d9a8;
+            line-height: 1.9;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .donate-email {
+            color: #f5c542;
+            font-weight: 600;
+        }
+
+        .da-btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 14px 36px;
+            border-radius: 10px;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .tg-block {
+            text-align: center;
+            padding: 48px 24px;
+            margin-bottom: 48px;
+        }
+
+        .tg-block h2 {
+            font-family: 'Cinzel', serif;
+            color: #f5c542;
+            margin-bottom: 12px;
+            font-size: 30px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .tg-block p {
+            color: #9c8a5c;
+            margin-bottom: 28px;
+        }
+
+        .tg-join-btn {
+            display: inline-block;
+            padding: 14px 44px;
+            border-radius: 10px;
+            font-size: 18px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        footer {
+            background: linear-gradient(180deg, #0d0d14 0%, #101018 100%);
+            border-top: 1px solid rgba(255, 215, 0, 0.25);
+            text-align: center;
+            padding: 24px;
+            color: #9c8a5c;
+            font-size: 14px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(180deg, #1a1a24 0%, #12121a 100%);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            border-radius: 14px;
+            max-width: 620px;
+            width: 90%;
+            padding: 36px;
+            position: relative;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.1), 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #9c8a5c;
+            font-size: 26px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #f5c542;
+        }
+
+        .modal-content h3 {
+            font-family: 'Cinzel', serif;
+            color: #f5c542;
+            margin-bottom: 18px;
+            font-size: 24px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .modal-content ol {
+            padding-left: 20px;
+            color: #e8d9a8;
+            line-height: 2;
+            font-size: 15px;
+        }
+
+        .modal-content .modal-note {
+            font-size: 12px;
+            color: #9c8a5c;
+            margin-top: 14px;
+        }
+
+        .modal-content .modal-note b {
+            color: #ff0000;
+        }
+
+        .modal-ip {
+            color: #f5c542;
+            font-weight: 700;
+            background: rgba(245, 197, 66, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+
+        .red {
+            color: #ff0000;
+        }
+
+        .donate-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+
+        .donate-tab {
+            padding: 14px 40px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            background: #12121a;
+            color: #9c8a5c;
+            transition: all 0.3s;
+        }
+
+        .donate-tab.active {
+            background-image:
+                linear-gradient(180deg, #fff8d0 0%, #ffe066 25%, #f5c542 50%, #d4a017 75%, #b8860b 100%);
+            color: #3a2a00;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+            border-color: #8a6d1f;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .donate-tab:hover:not(.active) {
+            border-color: #f5c542;
+            color: #f5c542;
+        }
+
+        .plan-content {
+            display: none;
+        }
+
+        .plan-content.active {
+            display: block;
+        }
+
+        .enchant-locked {
+            position: relative;
+            padding: 40px 24px;
+            border: 1px dashed rgba(255, 215, 0, 0.35);
+            border-radius: 12px;
+            background: rgba(255, 215, 0, 0.03);
+        }
+
+        .lock-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            filter: grayscale(0.4);
+        }
+
+        .enchant-locked h3 {
+            font-family: 'Cinzel', serif;
+            color: #9c8a5c;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .enchant-locked p {
+            color: #9c8a5c;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .unlock-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #e8d9a8;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .unlock-check input {
+            width: 18px;
+            height: 18px;
+            accent-color: #f5c542;
+            cursor: pointer;
+        }
+
+        .enchant-list {
+            list-style: none;
+            max-width: 620px;
+            margin: 0 auto 28px;
+            text-align: left;
+        }
+
+        .enchant-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.12);
+            color: #e8d9a8;
+            font-size: 15px;
+            line-height: 1.6;
+            flex-wrap: wrap;
+        }
+
+        .enchant-list li:last-child {
+            border-bottom: none;
+        }
+
+        .enchant-price {
+            font-family: 'Cinzel', serif;
+            color: #f5c542;
+            font-weight: 700;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .enchant-unlocked h3 {
+            font-family: 'Cinzel', serif;
+            color: #f5c542;
+            font-size: 24px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .enchant-unlocked > p {
+            color: #9c8a5c;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 64px 20px;
+            }
+
+            main {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 16px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .hero {
+                padding: 56px 16px;
+            }
+
+            .hero h2 {
+                font-size: 18px;
+            }
+
+            .server-ip {
+                font-size: 15px;
+                padding: 10px 20px;
+                max-width: 100%;
+                word-break: break-all;
+            }
+
+            .about,
+            .donate-section,
+            .tg-block {
+                padding: 32px 16px;
+            }
+
+            .donate-tabs {
+                gap: 10px;
+            }
+
+            .donate-tab {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            .modal-content {
+                padding: 28px 20px;
+                max-width: 92%;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .donate-tabs {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .donate-tab {
+                width: 100%;
+            }
+
+            .join-btn,
+            .da-btn,
+            .tg-join-btn {
+                width: 100%;
+                max-width: 100%;
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+
+            .tg-link {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+
+            .donate-btn {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+
+            .donate-perks li {
+                font-size: 14px;
+                padding: 12px 0;
+            }
+
+            .enchant-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .enchant-list li span:first-child {
+                text-align: center;
+                width: 100%;
+            }
+
+            .enchant-price {
+                margin: 0 auto;
+            }
+
+            .modal-content ol {
+                font-size: 14px;
+                padding-left: 16px;
+            }
+
+            .modal-content h3 {
+                font-size: 20px;
+            }
+
+            footer {
+                padding: 20px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Golden<span>Craft</span></div>
+        <div class="header-actions">
+            <a class="tg-link" href="https://t.me/+L8jsu5vRnpMzMWYy" target="_blank" rel="noopener">&#9993; Мы в Telegram</a>
+            <button class="gold-btn donate-btn" onclick="document.getElementById('donate').scrollIntoView({behavior:'smooth'})">&#9829; Донат</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Golden Craft</h1>
+        <h2>Крутой Minecraft сервер!<br>Возможно, нам не хватает именно тебя!</h2>
+        <button class="gold-btn join-btn" onclick="document.getElementById('joinModal').classList.add('open')">Присоединиться к нам</button>
+        <br>
+        <div class="server-ip">goldencraft2season.aternos.me:54130</div>
+    </section>
+
+    <main>
+        <div class="about panel">
+            <h2 class="section-title">О сервере</h2>
+            <p>
+                Немного о нашем сервере. 📅 Первый сезон начался 26 мая 2025 года, но был прерван атакой бота.<br><br>
+                🔥 Второй сезон запущен 30 декабря 2025 года — и он уже в разгаре!
+            </p>
+        </div>
+
+        <div class="donate-section panel" id="donate">
+            <h2 class="section-title">Донат</h2>
+            <div class="donate-tabs">
+                <button class="donate-tab active" id="tabSponsor" onclick="switchPlan('sponsor')">&#128081; Спонсор</button>
+                <button class="donate-tab" id="tabEnchant" onclick="switchPlan('enchant')">&#9876; Зачарования</button>
+            </div>
+
+            <div class="plan-content active" id="planSponsor">
+                <p style="color: #e8d9a8; margin-bottom: 16px;">Ты можешь поддержать сервер и купить донат <b class="red">«Спонсор»</b></p>
+                <div class="sponsor-price">89₽ / месяц</div>
+                <ul class="donate-perks">
+                    <li>1. Цветной ник на сервере и роль в Discord</li>
+                    <li>2. Возможность подключаться к «Админской хате» (голосовой чат специально для спонсоров и админов) в Discord</li>
+                    <li>3. Ты будешь узнавать раньше об обновлениях и событиях</li>
+                    <li>4. Кешбэк в размере 48 Алм</li>
+                </ul>
+                <p class="donate-note">¹ время доната начнётся после обновления сервера на новую версию</p>
+                <p class="donate-note">² купить донат можно только на 1 месяц</p>
+                <p class="donate-how">
+                    Чтобы купить «Спонсор», напиши на почту <span class="donate-email">supp-goldencraft@outlook.com</span>:<br>
+                    1. Свой ник майнкрафт<br>
+                    2. Своё имя<br>
+                    3. Имя в Discord
+                </p>
+                <a class="gold-btn da-btn" href="https://www.donationalerts.com/r/consor" target="_blank" rel="noopener">&#9829; Оплатить через Donation Alerts</a>
+            </div>
+
+            <div class="plan-content" id="planEnchant">
+                <div class="enchant-locked" id="enchantLocked">
+                    <div class="lock-icon">&#128274;</div>
+                    <h3>Зачарования</h3>
+                    <p>Раздел с зачарованиями откроется только после покупки «Спонсора».<br>Купи «Спонсор» во вкладке выше и получи доступ к зачарованиям!</p>
+                    <a class="gold-btn da-btn" href="https://www.donationalerts.com/r/consor" target="_blank" rel="noopener">Купить «Спонсор» через Donation Alerts</a>
+                    <br><br>
+                    <label class="unlock-check">
+                        <input type="checkbox" id="sponsorCheck" onchange="unlockEnchants(this.checked)">
+                        У меня уже есть «Спонсор» — открыть зачарования
+                    </label>
+                </div>
+
+                <div class="enchant-unlocked" id="enchantUnlocked" style="display:none;">
+                    <h3>&#9876; Зачарования для Спонсоров</h3>
+                    <p>Выбери зачарование — оно будет выдано на твой предмет после оплаты.</p>
+                    <ul class="enchant-list">
+                        <li><span>Меч — Острота V</span><span class="enchant-price">49₽</span></li>
+                        <li><span>Лук — Сила V</span><span class="enchant-price">49₽</span></li>
+                        <li><span>Броня — Защита IV (полный сет)</span><span class="enchant-price">79₽</span></li>
+                        <li><span>Кирка — Эффективность V + Удача III</span><span class="enchant-price">59₽</span></li>
+                        <li><span>Топор — Эффективность V</span><span class="enchant-price">39₽</span></li>
+                    </ul>
+                    <p class="donate-note">При оплате укажи в комментарии к донату нужное зачарование и свой ник майнкрафт</p>
+                    <a class="gold-btn da-btn" href="https://www.donationalerts.com/r/consor" target="_blank" rel="noopener">&#9829; Оплатить через Donation Alerts</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tg-block panel">
+            <h2>Наш Telegram</h2>
+            <p>Подпишись на наш Telegram-канал, чтобы не пропускать новости, обновления, мод-сборку и события!</p>
+            <a class="gold-btn tg-join-btn" href="https://t.me/+L8jsu5vRnpMzMWYy" target="_blank" rel="noopener">Подписаться</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>make by MoDDyDaN</p>
+    </footer>
+
+    <div class="modal" id="joinModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('joinModal').classList.remove('open')">&times;</button>
+            <h3>Как присоединиться к нам?</h3>
+            <ol>
+                <li>Написать на почту (supp-goldencraft@outlook.com) свой ник, имя, возраст, часовой пояс, если вас пригласил друг — написать его ник¹, и ждать подтверждения.</li>
+                <li>Если вас подтвердили, то: скачать Minecraft 1.21.4 ядро Fabric.</li>
+                <li>Скачать с Telegram-канала мод-сборку.</li>
+                <li>Зайти по этому IP: <span class="modal-ip">goldencraft2season.aternos.me:54130</span></li>
+            </ol>
+            <p class="modal-note">¹ Ты и друг получите <b>«Спонсор»</b> на 1 неделю</p>
+        </div>
+    </div>
+
+    <script>
+        function switchPlan(plan) {
+            document.getElementById('tabSponsor').classList.toggle('active', plan === 'sponsor');
+            document.getElementById('tabEnchant').classList.toggle('active', plan === 'enchant');
+            document.getElementById('planSponsor').classList.toggle('active', plan === 'sponsor');
+            document.getElementById('planEnchant').classList.toggle('active', plan === 'enchant');
+        }
+
+        function unlockEnchants(unlocked) {
+            document.getElementById('enchantLocked').style.display = unlocked ? 'none' : 'block';
+            document.getElementById('enchantUnlocked').style.display = unlocked ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
