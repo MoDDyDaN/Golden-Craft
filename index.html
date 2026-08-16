@@ -547,6 +547,73 @@
             margin-bottom: 20px;
         }
 
+        .mods-section {
+            padding: 48px 24px;
+            margin-bottom: 64px;
+            text-align: center;
+        }
+
+        .mods-desc {
+            color: #9c8a5c;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .mods-desc b {
+            color: #f5c542;
+        }
+
+        .mod-list {
+            list-style: none;
+            max-width: 720px;
+            margin: 28px auto 0;
+            text-align: left;
+        }
+
+        .mod-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 4px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.12);
+            color: #e8d9a8;
+            font-size: 13px;
+            flex-wrap: wrap;
+        }
+
+        .mod-list li:last-child {
+            border-bottom: none;
+        }
+
+        .mod-list li span:first-child {
+            flex: 1;
+            min-width: 200px;
+            word-break: break-all;
+        }
+
+        .mod-size {
+            color: #9c8a5c;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .mod-list a {
+            color: #f5c542;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 4px 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 6px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .mod-list a:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #f5c542;
+        }
+
         @media (max-width: 1024px) {
             .hero {
                 padding: 64px 20px;
@@ -743,6 +810,23 @@
                     <a class="gold-btn da-btn" href="https://www.donationalerts.com/r/consor" target="_blank" rel="noopener">&#9829; Оплатить через Donation Alerts</a>
                 </div>
             </div>
+        </div>
+
+        <div class="mods-section panel">
+            <h2 class="section-title">Мод-сборка</h2>
+            <p class="mods-desc">Набор модов для Minecraft 1.21.4 (ядро Fabric) — установи все файлы в папку <b>mods</b>.</p>
+            <a class="gold-btn da-btn" href="mods.zip" download>&#11015; Скачать мод-сборку (ZIP)</a>
+            <ul class="mod-list">
+                <li><span>ArmorPoser-fabric-1.21.4-8.1.2.jar</span><span class="mod-size">139 КБ</span><a href="mods/ArmorPoser-fabric-1.21.4-8.1.2.jar" download>&#11015;</a></li>
+                <li><span>cloth-config-17.0.144-fabric.jar</span><span class="mod-size">1.1 МБ</span><a href="mods/cloth-config-17.0.144-fabric.jar" download>&#11015;</a></li>
+                <li><span>emotecraft-fabric-for-MC1.21.4-2.5.8.jar</span><span class="mod-size">1.2 МБ</span><a href="mods/emotecraft-fabric-for-MC1.21.4-2.5.8.jar" download>&#11015;</a></li>
+                <li><span>fabric-api-0.119.4+1.21.4.jar</span><span class="mod-size">2.1 МБ</span><a href="mods/fabric-api-0.119.4+1.21.4.jar" download>&#11015;</a></li>
+                <li><span>modmenu-13.0.3.jar</span><span class="mod-size">1.0 МБ</span><a href="mods/modmenu-13.0.3.jar" download>&#11015;</a></li>
+                <li><span>MyTotemDoll-2.3.3+1.21.4.jar</span><span class="mod-size">1.8 МБ</span><a href="mods/MyTotemDoll-2.3.3+1.21.4.jar" download>&#11015;</a></li>
+                <li><span>player-animation-lib-fabric-2.0.5+1.21.4.jar</span><span class="mod-size">198 КБ</span><a href="mods/player-animation-lib-fabric-2.0.5+1.21.4.jar" download>&#11015;</a></li>
+                <li><span>skinrestorer-2.5.0+1.21-fabric.jar</span><span class="mod-size">212 КБ</span><a href="mods/skinrestorer-2.5.0+1.21-fabric.jar" download>&#11015;</a></li>
+                <li><span>voicechat-fabric-1.21.4-2.6.12.jar</span><span class="mod-size">5.1 МБ</span><a href="mods/voicechat-fabric-1.21.4-2.6.12.jar" download>&#11015;</a></li>
+            </ul>
         </div>
 
         <div class="tg-block panel">
