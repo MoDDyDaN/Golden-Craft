@@ -459,81 +459,6 @@
             display: block;
         }
 
-        .enchant-locked {
-            position: relative;
-            padding: 40px 24px;
-            border: 1px dashed rgba(255, 215, 0, 0.35);
-            border-radius: 12px;
-            background: rgba(255, 215, 0, 0.03);
-        }
-
-        .lock-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            filter: grayscale(0.4);
-        }
-
-        .enchant-locked h3 {
-            font-family: 'Cinzel', serif;
-            color: #9c8a5c;
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .enchant-locked p {
-            color: #9c8a5c;
-            margin-bottom: 24px;
-            line-height: 1.7;
-        }
-
-        .unlock-check {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #e8d9a8;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .unlock-check input {
-            width: 18px;
-            height: 18px;
-            accent-color: #f5c542;
-            cursor: pointer;
-        }
-
-        .enchant-list {
-            list-style: none;
-            max-width: 620px;
-            margin: 0 auto 28px;
-            text-align: left;
-        }
-
-        .enchant-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.12);
-            color: #e8d9a8;
-            font-size: 15px;
-            line-height: 1.6;
-            flex-wrap: wrap;
-        }
-
-        .enchant-list li:last-child {
-            border-bottom: none;
-        }
-
-        .enchant-price {
-            font-family: 'Cinzel', serif;
-            color: #f5c542;
-            font-weight: 700;
-            font-size: 16px;
-            white-space: nowrap;
-        }
-
         .enchant-unlocked h3 {
             font-family: 'Cinzel', serif;
             color: #f5c542;
@@ -714,23 +639,6 @@
                 padding: 12px 0;
             }
 
-            .enchant-list li {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-                text-align: center;
-                width: 100%;
-            }
-
-            .enchant-list li span:first-child {
-                text-align: center;
-                width: 100%;
-            }
-
-            .enchant-price {
-                margin: 0 auto;
-            }
-
             .modal-content ol {
                 font-size: 14px;
                 padding-left: 16px;
@@ -791,20 +699,8 @@
             </div>
 
             <div class="plan-content" id="planEnchant">
-                <div class="enchant-locked" id="enchantLocked">
-                    <div class="lock-icon">&#128274;</div>
-                    <h3>Зачарования</h3>
-                    <p>Раздел с зачарованиями откроется только после покупки «Спонсора».<br>Купи «Спонсор» во вкладке выше и получи доступ к зачарованиям!</p>
-                    <a class="gold-btn da-btn" href="https://www.donationalerts.com/r/consor" target="_blank" rel="noopener">Купить «Спонсор» через Donation Alerts</a>
-                    <br><br>
-                    <label class="unlock-check">
-                        <input type="checkbox" id="sponsorCheck" onchange="unlockEnchants(this.checked)">
-                        У меня уже есть «Спонсор» — открыть зачарования
-                    </label>
-                </div>
-
-                <div class="enchant-unlocked" id="enchantUnlocked" style="display:none;">
-                    <h3>&#9876; Зачарования для Спонсоров</h3>
+                <div class="enchant-unlocked">
+                    <h3>&#9876; Зачарования</h3>
                     <div class="sponsor-price">Случайное зачарование — 49₽</div>
                     <p>При оплате укажи в комментарии к донату свой ник майнкрафт</p>
                     <a class="gold-btn da-btn" href="https://www.donationalerts.com/r/consor" target="_blank" rel="noopener">&#9829; Оплатить через Donation Alerts</a>
@@ -860,11 +756,6 @@
             document.getElementById('tabEnchant').classList.toggle('active', plan === 'enchant');
             document.getElementById('planSponsor').classList.toggle('active', plan === 'sponsor');
             document.getElementById('planEnchant').classList.toggle('active', plan === 'enchant');
-        }
-
-        function unlockEnchants(unlocked) {
-            document.getElementById('enchantLocked').style.display = unlocked ? 'none' : 'block';
-            document.getElementById('enchantUnlocked').style.display = unlocked ? 'block' : 'none';
         }
     </script>
 </body>
