@@ -632,6 +632,14 @@
             white-space: nowrap;
         }
 
+        .lb-modal-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
         @media (prefers-color-scheme: dark) {
             .logo,
             .hero h1,
@@ -859,7 +867,7 @@
             </div>
         </div>
 
-        <div class="mods-section panel">
+        <div class="mods-section panel" id="mods">
             <h2 class="section-title">Мод-сборка</h2>
             <p class="mods-desc">Набор модов для Minecraft 1.21.4 (ядро Fabric) — установи все файлы в папку <b>mods</b>.</p>
             <a class="gold-btn da-btn" href="mods.zip" download>&#11015; Скачать мод-сборку (ZIP)</a>
@@ -922,7 +930,7 @@
             <ol>
                 <li>Написать на почту (supp-goldencraft@outlook.com) свой ник, имя, возраст, часовой пояс, если вас пригласил друг — написать его ник¹, и ждать подтверждения.</li>
                 <li>Если вас подтвердили, то: скачать Minecraft 1.21.4 ядро Fabric.</li>
-                <li>Скачать с Telegram-канала мод-сборку.</li>
+                <li>Скачать мод-сборку на сайте: <button class="gold-btn lb-modal-btn" onclick="document.getElementById('joinModal').classList.remove('open'); document.getElementById('mods').scrollIntoView({behavior:'smooth'})">Скачать мод-сборку</button></li>
                 <li>Зайти по этому IP: <span class="modal-ip">goldencraft2season.aternos.me:54130</span></li>
             </ol>
         </div>
