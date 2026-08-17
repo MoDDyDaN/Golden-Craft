@@ -6,6 +6,10 @@
     <title>Golden Craft — Minecraft сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -537,6 +541,28 @@
         .mod-list a:hover {
             background: rgba(255, 215, 0, 0.1);
             border-color: #f5c542;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .logo,
+            .hero h1,
+            .section-title,
+            .sponsor-price {
+                background: linear-gradient(180deg, #fff6d5 0%, #f5c542 35%, #b8860b 55%, #f5c542 75%, #fff6d5 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: #f5c542;
+            }
+
+            .logo span,
+            .hero h1 span {
+                background: linear-gradient(180deg, #ffffff 0%, #e8e8e8 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: #ffffff;
+            }
         }
 
         @media (max-width: 1024px) {
